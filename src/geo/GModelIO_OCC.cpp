@@ -180,12 +180,12 @@ void OCC_Internals::reset()
 void* OCC_Internals::find(int dim, int tag)
 {
   switch(dim) {
-  case 0: return &_tagVertex.Find(tag);
-  case 1: return &_tagEdge.Find(tag);
-  case 2: return &_tagFace.Find(tag);
-  case 3: return &_tagSolid.Find(tag);
-  case -1: return &_tagWire.Find(tag);
-  case -2: return &_tagShell.Find(tag);
+  case 0: return _tagVertex.ChangeSeek(tag);
+  case 1: return _tagEdge.ChangeSeek(tag);
+  case 2: return _tagFace.ChangeSeek(tag);
+  case 3: return _tagSolid.ChangeSeek(tag);
+  case -1: return _tagWire.ChangeSeek(tag);
+  case -2: return _tagShell.ChangeSeek(tag);
   default: return nullptr;
   }
 }
