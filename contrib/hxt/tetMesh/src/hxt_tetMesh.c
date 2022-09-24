@@ -72,6 +72,8 @@ HXTStatus hxtTetMesh(HXTMesh* mesh,
   HXTDelaunayOptions delOptions = {.bbox = &bbox,
                                    .verbosity = options->verbosity,
                                    .reproducible = options->reproducible,
+                                   .perfectDelaunay = 1,
+                                   .allowOuterInsertion = 1,
                                    .delaunayThreads = options->delaunayThreads};
 
   HXTNodalSizes nodalSizes = {
@@ -96,6 +98,8 @@ HXTStatus hxtTetMesh(HXTMesh* mesh,
   HXT_INFO_COND(options->verbosity>1, "Empty mesh finished\n");
 
   t[1] = omp_get_wtime();
+
+  // TODO: map the whole section below into the boundary recovery
 
   uint64_t nbMissingTriangles, nbLinesNotInTriangles, nbMissingLines=0;
   uint64_t* tri2TetMap = NULL;
@@ -127,7 +131,8 @@ HXTStatus hxtTetMesh(HXTMesh* mesh,
                nbMissingLines);
 
     uint32_t oldNumVertices = mesh->vertices.num;
-    HXT_CHECK( hxt_boundary_recovery(mesh, options->toleranceInitialDelaunay) );
+    HXTSurfMod * surfMod = NULL;
+    HXT_CHECK( hxt_boundary_recovery(mesh, options->toleranceInitialDelaunay, &surfMod) );
 
     if(oldNumVertices < mesh->vertices.num) {
       HXT_INFO("Steiner(s) point(s) were inserted");
@@ -169,10 +174,12 @@ HXTStatus hxtTetMesh(HXTMesh* mesh,
   t[4] = omp_get_wtime();
 
   if(options->refine){
+    // TODO: move set flags to the function and add option
     HXT_CHECK( setFlagsToProcessOnlyVolumesInBrep(mesh) );
 
     nodalSizes.enabled = 1; // activate the filtering...
-
+    delOptions.perfectDelaunay = 0;
+    delOptions.allowOuterInsertion = 0;
     HXT_CHECK( hxtRefineTetrahedra(mesh, &delOptions) );
 
     HXT_CHECK( hxtNodalSizesDestroy(&nodalSizes) );
@@ -185,6 +192,7 @@ HXTStatus hxtTetMesh(HXTMesh* mesh,
   // aspect_ratio_graph(mesh);
 
   if(options->optimize) {
+    // TODO: move set flags to the function and add option
     HXT_CHECK( setFlagsToProcessOnlyVolumesInBrep(mesh) );
 
     HXT_CHECK( hxtOptimizeTetrahedra(mesh,
