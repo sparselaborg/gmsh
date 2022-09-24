@@ -390,6 +390,8 @@ module gmsh
     contains
     procedure, nopass :: addPoint => &
         gmshModelGeoAddPoint
+    procedure, nopass :: find => &
+        gmshModelGeoFind
     procedure, nopass :: addLine => &
         gmshModelGeoAddLine
     procedure, nopass :: addCircleArc => &
@@ -7526,6 +7528,32 @@ module gmsh
                            tag=optval_c_int(-1, tag), &
                            ierr_=ierr)
   end function gmshModelGeoAddPoint
+
+  !> Finds the OCC shape corresponding to the entity of dimension `dim' and tag
+  !! `tag'.
+  function gmshModelGeoFind(dim, &
+                            tag, &
+                            ierr)
+    interface
+    function C_API(dim, &
+                   tag, &
+                   ierr_) &
+      bind(C, name="gmshModelGeoFind")
+      use, intrinsic :: iso_c_binding
+      c_void_p() :: C_API
+      integer(c_int), value, intent(in) :: dim
+      integer(c_int), value, intent(in) :: tag
+      integer(c_int), intent(out), optional :: ierr_
+    end function C_API
+    end interface
+    void(c_ptr) :: gmshModelGeoFind
+    integer, intent(in) :: dim
+    integer, intent(in) :: tag
+    integer(c_int), intent(out), optional :: ierr
+    gmshModelGeoFind = C_API(dim=int(dim, c_int), &
+                       tag=int(tag, c_int), &
+                       ierr_=ierr)
+  end function gmshModelGeoFind
 
   !> Add a straight line segment in the built-in CAD representation, between the
   !! two points with tags `startTag' and `endTag'. If `tag' is positive, set the

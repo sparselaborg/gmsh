@@ -4356,6 +4356,25 @@ class model:
         add_point = addPoint
 
         @staticmethod
+        def find(dim, tag):
+            """
+            gmsh.model.geo.find(dim, tag)
+
+            Finds the OCC shape corresponding to the entity of dimension `dim' and tag
+            `tag'.
+
+            Return an integer value.
+            """
+            ierr = c_int()
+            lib.gmshModelGeoFind(
+                c_int(dim),
+                c_int(tag),
+                byref(ierr))
+            if ierr.value != 0:
+                raise Exception(logger.getLastError())
+            return api_result_
+
+        @staticmethod
         def addLine(startTag, endTag, tag=-1):
             """
             gmsh.model.geo.addLine(startTag, endTag, tag=-1)

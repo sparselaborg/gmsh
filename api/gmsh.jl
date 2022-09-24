@@ -3790,6 +3790,23 @@ end
 const add_point = addPoint
 
 """
+    gmsh.model.geo.find(dim, tag)
+
+Finds the OCC shape corresponding to the entity of dimension `dim` and tag
+`tag`.
+
+Return an integer value.
+"""
+function find(dim, tag)
+    ierr = Ref{Cint}()
+    ccall((:gmshModelGeoFind, gmsh.lib), Ptr{Cvoid},
+          (Cint, Cint, Ptr{Cint}),
+          dim, tag, ierr)
+    ierr[] != 0 && error(gmsh.logger.getLastError())
+    return api_result_
+end
+
+"""
     gmsh.model.geo.addLine(startTag, endTag, tag = -1)
 
 Add a straight line segment in the built-in CAD representation, between the two

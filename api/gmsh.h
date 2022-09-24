@@ -1854,6 +1854,13 @@ namespace gmsh { // Top-level functions
                             const double meshSize = 0.,
                             const int tag = -1);
 
+      // gmsh::model::geo::find
+      //
+      // Finds the OCC shape corresponding to the entity of dimension `dim' and tag
+      // `tag'.
+      GMSH_API void* find(const int dim,
+                          const int tag);
+
       // gmsh::model::geo::addLine
       //
       // Add a straight line segment in the built-in CAD representation, between

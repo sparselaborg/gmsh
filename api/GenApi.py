@@ -396,6 +396,29 @@ def ivectorvectordouble(name, value=None, python_value=None, julia_value=None):
 
 # output types
 
+class ovoidstar(arg):
+    rcpp_type = "void*"
+    rc_type = "void*"
+    rtexi_type = "integer value"
+    rjulia_type = "Ptr{Cvoid}"
+    fortran_c_api = ["c_void_p()"]
+    fortran_types = ["void(c_ptr)"]
+
+    def __init__(self, name, value=None, python_value=None, julia_value=None):
+        arg.__init__(self, name, value, python_value, julia_value, "int &",
+                     "int *", True)
+        api_name = "api_" + name + "_"
+        self.c_arg = "*" + name
+        self.cwrap_arg = "&" + name
+        self.python_pre = api_name + " = c_void_p()"
+        self.python_arg = "byref(" + api_name + ")"
+        self.python_return = api_name + ".value"
+        self.julia_ctype = "Ptr{Ptr{Cvoid}}"
+        self.julia_pre = api_name + " = Ref{Ptr{Cvoid}}()"
+        self.julia_arg = api_name
+        self.julia_return = api_name + "[]"
+
+
 class oint(arg):
     rcpp_type = "int"
     rc_type = "int"
@@ -2568,6 +2591,7 @@ class API:
                     if file.endswith(ext):
                         filename = os.path.join(r, file)
                         contents = []
+                        print(filename)
                         for line in open(filename, 'r'):
                             contents.append(line)
                         data.append([filename, contents])

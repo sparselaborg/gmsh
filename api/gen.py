@@ -615,7 +615,7 @@ doc = '''Add a geometrical point in the built-in CAD representation, at coordina
 geo.add('addPoint', doc, oint, idouble('x'), idouble('y'), idouble('z'), idouble('meshSize', '0.'), iint('tag', '-1'))
 
 doc = '''Finds the OCC shape corresponding to the entity of dimension `dim' and tag `tag'.'''
-geo.add('find', doc, ivoidstar, iint('dim'), iint('tag'))
+geo.add('find', doc, ovoidstar, iint('dim'), iint('tag'))
 
 doc = '''Add a straight line segment in the built-in CAD representation, between the two points with tags `startTag' and `endTag'. If `tag' is positive, set the tag explicitly; otherwise a new tag is selected automatically. Return the tag of the line.'''
 geo.add('addLine', doc, oint, iint('startTag'), iint('endTag'), iint('tag', '-1'))
