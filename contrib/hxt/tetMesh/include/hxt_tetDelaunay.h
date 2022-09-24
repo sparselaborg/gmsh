@@ -108,10 +108,7 @@ HXTStatus hxtDelaunaySteadyVertices(HXTMesh* mesh, HXTDelaunayOptions* options, 
  *  - mesh->tetrahedra.* will change
  *  - mesh->vertices.coord[4*i+3] will change
  *  - vertices that could not be inserted are deleted from mesh->vertices !
- *  - options->numVerticesInMesh will be incremented by the number of vertices inserted.
- *    the increment might be lower than (mesh->vertices.num - options->insertionFirst) if
- *    nodalSizes are given or if allowOuterInsertion == False and some vertices are not inserted
- *    because they fall on the outside of all volumes.
+ *  - options->numVerticesInMesh will change
  *
  * \param mesh: a valid Delaunay mesh
  * \param options: options to give to the Delaunay algorithm \ref HXTDelaunayOptions
