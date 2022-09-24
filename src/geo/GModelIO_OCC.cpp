@@ -177,6 +177,19 @@ void OCC_Internals::reset()
   _unbind();
 }
 
+void* OCC_Internals::find(int dim, int tag)
+{
+  switch(dim) {
+  case 0: return _tagVertex.Find1(tag);
+  case 1: return _tagEdge.Find1(tag);
+  case 2: return _tagFace.Find1(tag);
+  case 3: return _tagSolid.Find1(tag);
+  case -1: return _tagWire.Find1(tag);
+  case -2: return _tagShell.Find1(tag);
+  default: return nullptr;
+  }
+}
+
 void OCC_Internals::setMaxTag(int dim, int val)
 {
   if(dim < -2 || dim > 3) return;

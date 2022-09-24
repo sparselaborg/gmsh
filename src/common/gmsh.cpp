@@ -6303,6 +6303,12 @@ static void _createOcc()
     GModel::current()->createOCCInternals();
 }
 
+GMSH_API void* gmsh::mode::occ::find(int dim, int tag)
+{
+    if(!_checkInit()) return nullptr;
+    return GModel::current()->getOCCInternals()->find(dim, tag);
+}
+
 GMSH_API int gmsh::model::occ::addPoint(const double x, const double y,
                                         const double z, const double meshSize,
                                         const int tag)

@@ -191,6 +191,9 @@ public:
   // reset all maps
   void reset();
 
+  // find the OCC shape for the entity
+  void* find(int dim, int tag);
+
   // set/get max tag of entity for each dimension (0, 1, 2, 3), as well as
   // -2 for shells and -1 for wires
   void setMaxTag(int dim, int val);
