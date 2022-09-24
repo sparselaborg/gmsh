@@ -6303,7 +6303,7 @@ static void _createOcc()
     GModel::current()->createOCCInternals();
 }
 
-GMSH_API void* gmsh::mode::occ::find(int dim, int tag)
+GMSH_API void* gmsh::model::occ::find(int dim, int tag)
 {
     if(!_checkInit()) return nullptr;
     return GModel::current()->getOCCInternals()->find(dim, tag);

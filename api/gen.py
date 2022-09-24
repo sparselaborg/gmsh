@@ -614,9 +614,6 @@ geo = model.add_module('geo', 'built-in CAD kernel functions')
 doc = '''Add a geometrical point in the built-in CAD representation, at coordinates (`x', `y', `z'). If `meshSize' is > 0, add a meshing constraint at that point. If `tag' is positive, set the tag explicitly; otherwise a new tag is selected automatically. Return the tag of the point. (Note that the point will be added in the current model only after `synchronize' is called. This behavior holds for all the entities added in the geo module.)'''
 geo.add('addPoint', doc, oint, idouble('x'), idouble('y'), idouble('z'), idouble('meshSize', '0.'), iint('tag', '-1'))
 
-doc = '''Finds the OCC shape corresponding to the entity of dimension `dim' and tag `tag'.'''
-geo.add('find', doc, ovoidstar, iint('dim'), iint('tag'))
-
 doc = '''Add a straight line segment in the built-in CAD representation, between the two points with tags `startTag' and `endTag'. If `tag' is positive, set the tag explicitly; otherwise a new tag is selected automatically. Return the tag of the line.'''
 geo.add('addLine', doc, oint, iint('startTag'), iint('endTag'), iint('tag', '-1'))
 
@@ -755,6 +752,9 @@ mesh.add('setSizeFromBoundary', doc, None, iint('dim'), iint('tag'), iint('val')
 ################################################################################
 
 occ = model.add_module('occ', 'OpenCASCADE CAD kernel functions')
+
+doc = '''Finds the OCC shape corresponding to the entity of dimension `dim' and tag `tag'.'''
+occ.add('find', doc, ovoidstar, iint('dim'), iint('tag'))
 
 doc = '''Add a geometrical point in the OpenCASCADE CAD representation, at coordinates (`x', `y', `z'). If `meshSize' is > 0, add a meshing constraint at that point. If `tag' is positive, set the tag explicitly; otherwise a new tag is selected automatically. Return the tag of the point. (Note that the point will be added in the current model only after `synchronize' is called. This behavior holds for all the entities added in the occ module.)'''
 occ.add('addPoint', doc, oint, idouble('x'), idouble('y'), idouble('z'), idouble('meshSize', '0.'), iint('tag', '-1'))

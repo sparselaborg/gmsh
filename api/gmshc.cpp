@@ -2521,19 +2521,6 @@ GMSH_API int gmshModelGeoAddPoint(const double x, const double y, const double z
   return result_api_;
 }
 
-GMSH_API void* gmshModelGeoFind(const int dim, const int tag, int * ierr)
-{
-  void* result_api_ = 0;
-  if(ierr) *ierr = 0;
-  try {
-    result_api_ = gmsh::model::geo::find(dim, tag);
-  }
-  catch(...){
-    if(ierr) *ierr = 1;
-  }
-  return result_api_;
-}
-
 GMSH_API int gmshModelGeoAddLine(const int startTag, const int endTag, const int tag, int * ierr)
 {
   int result_api_ = 0;
@@ -3157,6 +3144,19 @@ GMSH_API void gmshModelGeoMeshSetSizeFromBoundary(const int dim, const int tag, 
   catch(...){
     if(ierr) *ierr = 1;
   }
+}
+
+GMSH_API void* gmshModelOccFind(const int dim, const int tag, int * ierr)
+{
+  void* result_api_ = 0;
+  if(ierr) *ierr = 0;
+  try {
+    result_api_ = gmsh::model::occ::find(dim, tag);
+  }
+  catch(...){
+    if(ierr) *ierr = 1;
+  }
+  return result_api_;
 }
 
 GMSH_API int gmshModelOccAddPoint(const double x, const double y, const double z, const double meshSize, const int tag, int * ierr)

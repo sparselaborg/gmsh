@@ -235,6 +235,8 @@ module gmsh
   type, public :: gmsh_model_occ_t
     type(gmsh_model_occ_mesh_t) :: mesh
     contains
+    procedure, nopass :: find => &
+        gmshModelOccFind
     procedure, nopass :: addPoint => &
         gmshModelOccAddPoint
     procedure, nopass :: addLine => &
@@ -390,8 +392,6 @@ module gmsh
     contains
     procedure, nopass :: addPoint => &
         gmshModelGeoAddPoint
-    procedure, nopass :: find => &
-        gmshModelGeoFind
     procedure, nopass :: addLine => &
         gmshModelGeoAddLine
     procedure, nopass :: addCircleArc => &
@@ -7529,32 +7529,6 @@ module gmsh
                            ierr_=ierr)
   end function gmshModelGeoAddPoint
 
-  !> Finds the OCC shape corresponding to the entity of dimension `dim' and tag
-  !! `tag'.
-  function gmshModelGeoFind(dim, &
-                            tag, &
-                            ierr)
-    interface
-    function C_API(dim, &
-                   tag, &
-                   ierr_) &
-      bind(C, name="gmshModelGeoFind")
-      use, intrinsic :: iso_c_binding
-      c_void_p() :: C_API
-      integer(c_int), value, intent(in) :: dim
-      integer(c_int), value, intent(in) :: tag
-      integer(c_int), intent(out), optional :: ierr_
-    end function C_API
-    end interface
-    void(c_ptr) :: gmshModelGeoFind
-    integer, intent(in) :: dim
-    integer, intent(in) :: tag
-    integer(c_int), intent(out), optional :: ierr
-    gmshModelGeoFind = C_API(dim=int(dim, c_int), &
-                       tag=int(tag, c_int), &
-                       ierr_=ierr)
-  end function gmshModelGeoFind
-
   !> Add a straight line segment in the built-in CAD representation, between the
   !! two points with tags `startTag' and `endTag'. If `tag' is positive, set the
   !! tag explicitly; otherwise a new tag is selected automatically. Return the
@@ -9324,6 +9298,32 @@ module gmsh
          val=int(val, c_int), &
          ierr_=ierr)
   end subroutine gmshModelGeoMeshSetSizeFromBoundary
+
+  !> Finds the OCC shape corresponding to the entity of dimension `dim' and tag
+  !! `tag'.
+  function gmshModelOccFind(dim, &
+                            tag, &
+                            ierr)
+    interface
+    function C_API(dim, &
+                   tag, &
+                   ierr_) &
+      bind(C, name="gmshModelOccFind")
+      use, intrinsic :: iso_c_binding
+      c_void_p() :: C_API
+      integer(c_int), value, intent(in) :: dim
+      integer(c_int), value, intent(in) :: tag
+      integer(c_int), intent(out), optional :: ierr_
+    end function C_API
+    end interface
+    void(c_ptr) :: gmshModelOccFind
+    integer, intent(in) :: dim
+    integer, intent(in) :: tag
+    integer(c_int), intent(out), optional :: ierr
+    gmshModelOccFind = C_API(dim=int(dim, c_int), &
+                       tag=int(tag, c_int), &
+                       ierr_=ierr)
+  end function gmshModelOccFind
 
   !> Add a geometrical point in the OpenCASCADE CAD representation, at
   !! coordinates (`x', `y', `z'). If `meshSize' is > 0, add a meshing constraint

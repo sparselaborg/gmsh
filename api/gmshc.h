@@ -1627,12 +1627,6 @@ GMSH_API int gmshModelGeoAddPoint(const double x,
                                   const int tag,
                                   int * ierr);
 
-/* Finds the OCC shape corresponding to the entity of dimension `dim' and tag
- * `tag'. */
-GMSH_API void* gmshModelGeoFind(const int dim,
-                                const int tag,
-                                int * ierr);
-
 /* Add a straight line segment in the built-in CAD representation, between the
  * two points with tags `startTag' and `endTag'. If `tag' is positive, set the
  * tag explicitly; otherwise a new tag is selected automatically. Return the
@@ -2083,6 +2077,12 @@ GMSH_API void gmshModelGeoMeshSetSizeFromBoundary(const int dim,
                                                   const int tag,
                                                   const int val,
                                                   int * ierr);
+
+/* Finds the OCC shape corresponding to the entity of dimension `dim' and tag
+ * `tag'. */
+GMSH_API void* gmshModelOccFind(const int dim,
+                                const int tag,
+                                int * ierr);
 
 /* Add a geometrical point in the OpenCASCADE CAD representation, at
  * coordinates (`x', `y', `z'). If `meshSize' is > 0, add a meshing constraint
