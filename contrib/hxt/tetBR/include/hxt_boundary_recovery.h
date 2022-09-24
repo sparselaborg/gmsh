@@ -6,10 +6,8 @@ extern "C" {
 #endif
 
 #include "hxt_mesh.h"
-#include "hxt_surfaceModifications.h"
 
-
-HXTStatus hxt_boundary_recovery(HXTMesh *mesh, double tol, HXTSurfMod **surfChange);
+  HXTStatus hxt_boundary_recovery(HXTMesh *mesh, double tol);
 
 #ifdef __cplusplus
 }
