@@ -816,7 +816,7 @@ void Msg::ProgressMeter(int n, bool log, const char *fmt, ...)
     }
 #endif
     if(_logFile) fprintf(_logFile, "Progress: %s\n", str);
-    if(_callback) (*_callback)("Progress", str);
+    if(_callback) (*_callback)("Progress", str2);
     if(!streamIsFile(stdout) && log && CTX::instance()->terminal){
       fprintf(stdout, "%s                                          \r",
               (n > N - 1) ? "" : str2);
