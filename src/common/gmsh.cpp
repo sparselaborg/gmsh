@@ -8617,7 +8617,7 @@ GMSH_API void* gmsh::logger::getCallback()
 
 GMSH_API void gmsh::logger::setCallback(void* callback)
 {
-  if(!_checkInit()) return
+  if(!_checkInit()) return;
   Msg::SetCallback(static_cast<GmshMessage*>(callback));
 }
 
