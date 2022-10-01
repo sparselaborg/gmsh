@@ -8609,6 +8609,18 @@ GMSH_API void gmsh::onelab::run(const std::string &name,
 
 // gmsh::logger
 
+GMSH_API void* gmsh::logger::getCallback()
+{
+  if(!_checkInit()) return;
+  return Msg::GetCallback();
+}
+
+GMSH_API void gmsh::logger::setCallback(void* callback)
+{
+  if(!_checkInit()) return;
+  Msg::SetCallback(callback);
+}
+
 GMSH_API void gmsh::logger::write(const std::string &message,
                                   const std::string &level)
 {

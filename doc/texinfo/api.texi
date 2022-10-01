@@ -6613,6 +6613,34 @@ Python (@url{@value{GITLAB-PREFIX}/examples/api\onelab_run.py#L24,onelab_run.py}
 @section Namespace @code{gmsh/logger}: information logging functions
 
 @ftable @code
+@item gmsh/logger/getCallback
+Get the message callback.
+
+@table @asis
+@item Input:
+-
+@item Output:
+-
+@item Return:
+integer value
+@item Language-specific definition:
+@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3844,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3375,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8595,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7525,Julia}
+@end table
+
+@item gmsh/logger/setCallback
+Set the message callback.
+
+@table @asis
+@item Input:
+@code{callback}
+@item Output:
+-
+@item Return:
+-
+@item Language-specific definition:
+@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3849,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3378,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8612,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7540,Julia}
+@end table
+
 @item gmsh/logger/write
 Write a @code{message}. @code{level} can be "info", "warning" or "error".
 
@@ -6624,7 +6652,7 @@ Write a @code{message}. @code{level} can be "info", "warning" or "error".
 @item Return:
 -
 @item Language-specific definition:
-@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3844,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3375,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8595,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7523,Julia}
+@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3854,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3382,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8627,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7555,Julia}
 @item Examples:
 C++ (@url{@value{GITLAB-PREFIX}/tutorials\c++\t7.cpp#L23,t7.cpp}, @url{@value{GITLAB-PREFIX}/tutorials\c++\t8.cpp#L41,t8.cpp}, @url{@value{GITLAB-PREFIX}/tutorials\c++\t9.cpp#L31,t9.cpp}, @url{@value{GITLAB-PREFIX}/tutorials\c++\t13.cpp#L26,t13.cpp}, @url{@value{GITLAB-PREFIX}/tutorials\c++\t16.cpp#L34,t16.cpp}, ...), Python (@url{@value{GITLAB-PREFIX}/tutorials\python\t8.py#L79,t8.py}, @url{@value{GITLAB-PREFIX}/tutorials\python\t9.py#L29,t9.py}, @url{@value{GITLAB-PREFIX}/tutorials\python\x5.py#L87,x5.py}, @url{@value{GITLAB-PREFIX}/examples/api\custom_gui.py#L60,custom_gui.py}, @url{@value{GITLAB-PREFIX}/examples/api\terrain_stl.py#L26,terrain_stl.py})
 @end table
@@ -6640,7 +6668,7 @@ Start logging messages.
 @item Return:
 -
 @item Language-specific definition:
-@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3850,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3380,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8610,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7537,Julia}
+@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3860,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3387,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8642,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7569,Julia}
 @item Examples:
 C++ (@url{@value{GITLAB-PREFIX}/tutorials\c++\t16.cpp#L27,t16.cpp}), Python (@url{@value{GITLAB-PREFIX}/tutorials\python\t16.py#L25,t16.py})
 @end table
@@ -6656,7 +6684,7 @@ Get logged messages.
 @item Return:
 -
 @item Language-specific definition:
-@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3855,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3383,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8623,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7553,Julia}
+@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3865,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3390,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8655,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7585,Julia}
 @item Examples:
 C++ (@url{@value{GITLAB-PREFIX}/tutorials\c++\t16.cpp#L137,t16.cpp}), Python (@url{@value{GITLAB-PREFIX}/tutorials\python\t16.py#L118,t16.py})
 @end table
@@ -6672,7 +6700,7 @@ Stop logging messages.
 @item Return:
 -
 @item Language-specific definition:
-@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3860,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3387,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8641,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7571,Julia}
+@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3870,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3394,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8673,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7603,Julia}
 @item Examples:
 C++ (@url{@value{GITLAB-PREFIX}/tutorials\c++\t16.cpp#L139,t16.cpp}), Python (@url{@value{GITLAB-PREFIX}/tutorials\python\t16.py#L120,t16.py})
 @end table
@@ -6688,7 +6716,7 @@ Return wall clock time.
 @item Return:
 floating point value
 @item Language-specific definition:
-@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3865,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3390,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8654,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7587,Julia}
+@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3875,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3397,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8686,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7619,Julia}
 @item Examples:
 Python (@url{@value{GITLAB-PREFIX}/examples/api\import_perf.py#L8,import_perf.py})
 @end table
@@ -6704,7 +6732,7 @@ Return CPU time.
 @item Return:
 floating point value
 @item Language-specific definition:
-@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3870,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3393,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8672,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7604,Julia}
+@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3880,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3400,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8704,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7636,Julia}
 @end table
 
 @item gmsh/logger/getLastError
@@ -6718,7 +6746,7 @@ Return last error message, if any.
 @item Return:
 -
 @item Language-specific definition:
-@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3875,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3396,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8690,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7621,Julia}
+@url{@value{GITLAB-PREFIX}/api/gmsh.h#L3885,C++}, @url{@value{GITLAB-PREFIX}/api/gmshc.h#L3403,C}, @url{@value{GITLAB-PREFIX}/api/gmsh.py#L8722,Python}, @url{@value{GITLAB-PREFIX}/api/gmsh.jl#L7653,Julia}
 @end table
 
 @end ftable

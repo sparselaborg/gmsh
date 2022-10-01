@@ -8592,6 +8592,38 @@ class logger:
     """
 
     @staticmethod
+    def getCallback():
+        """
+        gmsh.logger.getCallback()
+
+        Get the message callback.
+
+        Return an integer value.
+        """
+        ierr = c_int()
+        lib.gmshLoggerGetCallback(
+            byref(ierr))
+        if ierr.value != 0:
+            raise Exception(logger.getLastError())
+        return api_result_
+    get_callback = getCallback
+
+    @staticmethod
+    def setCallback(callback):
+        """
+        gmsh.logger.setCallback(callback)
+
+        Set the message callback.
+        """
+        ierr = c_int()
+        lib.gmshLoggerSetCallback(
+            c_void_p(callback),
+            byref(ierr))
+        if ierr.value != 0:
+            raise Exception(logger.getLastError())
+    set_callback = setCallback
+
+    @staticmethod
     def write(message, level="info"):
         """
         gmsh.logger.write(message, level="info")

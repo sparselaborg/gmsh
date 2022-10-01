@@ -3371,6 +3371,13 @@ GMSH_API void gmshOnelabRun(const char * name,
                             const char * command,
                             int * ierr);
 
+/* Get the message callback. */
+GMSH_API void* gmshLoggerGetCallback(int * ierr);
+
+/* Set the message callback. */
+GMSH_API void gmshLoggerSetCallback(void * callback,
+                                    int * ierr);
+
 /* Write a `message'. `level' can be "info", "warning" or "error". */
 GMSH_API void gmshLoggerWrite(const char * message,
                               const char * level,

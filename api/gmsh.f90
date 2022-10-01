@@ -51,6 +51,10 @@ module gmsh
 
   type, public :: gmsh_logger_t
     contains
+    procedure, nopass :: getCallback => &
+        gmshLoggerGetCallback
+    procedure, nopass :: setCallback => &
+        gmshLoggerSetCallback
     procedure, nopass :: write => &
         gmshLoggerWrite
     procedure, nopass :: start => &
@@ -14666,6 +14670,39 @@ module gmsh
          command=istring_(optval_c_str("", command)), &
          ierr_=ierr)
   end subroutine gmshOnelabRun
+
+  !> Get the message callback.
+  function gmshLoggerGetCallback(ierr)
+    interface
+    function C_API(ierr_) &
+      bind(C, name="gmshLoggerGetCallback")
+      use, intrinsic :: iso_c_binding
+      c_void_p() :: C_API
+      integer(c_int), intent(out), optional :: ierr_
+    end function C_API
+    end interface
+    void(c_ptr) :: gmshLoggerGetCallback
+    integer(c_int), intent(out), optional :: ierr
+    gmshLoggerGetCallback = C_API(ierr_=ierr)
+  end function gmshLoggerGetCallback
+
+  !> Set the message callback.
+  subroutine gmshLoggerSetCallback(callback, &
+                                   ierr)
+    interface
+    subroutine C_API(callback, &
+                     ierr_) &
+      bind(C, name="gmshLoggerSetCallback")
+      use, intrinsic :: iso_c_binding
+      type(c_ptr), value, intent(in) :: callback
+      integer(c_int), intent(out), optional :: ierr_
+    end subroutine C_API
+    end interface
+    type(c_ptr), intent(in) :: callback
+    integer(c_int), intent(out), optional :: ierr
+    call C_API(callback=callback, &
+         ierr_=ierr)
+  end subroutine gmshLoggerSetCallback
 
   !> Write a `message'. `level' can be "info", "warning" or "error".
   subroutine gmshLoggerWrite(message, &

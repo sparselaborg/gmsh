@@ -5801,6 +5801,23 @@ namespace gmsh { // Top-level functions
 
   namespace logger { // Information logging functions
 
+    // Get the message callback.
+    inline void* getCallback()
+    {
+      int ierr = 0;
+      void* result_api_ = gmshLoggerGetCallback(&ierr);
+      if(ierr) throwLastError();
+      return result_api_;
+    }
+
+    // Set the message callback.
+    inline void setCallback(void * callback)
+    {
+      int ierr = 0;
+      gmshLoggerSetCallback(callback, &ierr);
+      if(ierr) throwLastError();
+    }
+
     // Write a `message'. `level' can be "info", "warning" or "error".
     inline void write(const std::string & message,
                       const std::string & level = "info")

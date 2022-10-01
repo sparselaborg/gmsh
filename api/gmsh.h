@@ -3838,6 +3838,16 @@ namespace gmsh { // Top-level functions
 
   namespace logger { // Information logging functions
 
+    // gmsh::logger::getCallback
+    //
+    // Get the message callback.
+    GMSH_API void* getCallback();
+
+    // gmsh::logger::setCallback
+    //
+    // Set the message callback.
+    GMSH_API void setCallback(void * callback);
+
     // gmsh::logger::write
     //
     // Write a `message'. `level' can be "info", "warning" or "error".

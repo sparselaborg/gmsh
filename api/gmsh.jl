@@ -7516,6 +7516,38 @@ module logger
 import ..gmsh
 
 """
+    gmsh.logger.getCallback()
+
+Get the message callback.
+
+Return an integer value.
+"""
+function getCallback()
+    ierr = Ref{Cint}()
+    ccall((:gmshLoggerGetCallback, gmsh.lib), Ptr{Cvoid},
+          (Ptr{Cint},),
+          ierr)
+    ierr[] != 0 && error(gmsh.logger.getLastError())
+    return api_result_
+end
+const get_callback = getCallback
+
+"""
+    gmsh.logger.setCallback(callback)
+
+Set the message callback.
+"""
+function setCallback(callback)
+    ierr = Ref{Cint}()
+    ccall((:gmshLoggerSetCallback, gmsh.lib), Cvoid,
+          (Ptr{Cvoid}, Ptr{Cint}),
+          callback, ierr)
+    ierr[] != 0 && error(gmsh.logger.getLastError())
+    return nothing
+end
+const set_callback = setCallback
+
+"""
     gmsh.logger.write(message, level = "info")
 
 Write a `message`. `level` can be "info", "warning" or "error".

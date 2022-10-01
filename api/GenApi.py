@@ -117,6 +117,16 @@ def ivoidstar(name, value=None, python_value=None, julia_value=None):
     return a
 
 
+def ivoidstarnonconst(name, value=None, python_value=None, julia_value=None):
+    a = arg(name, value, python_value, julia_value, "void *",
+            "void *", False)
+    a.python_arg = "c_void_p(" + name + ")"
+    a.julia_ctype = "Ptr{Cvoid}"
+    a.fortran_types = ["type(c_ptr), intent(in)"]
+    a.fortran_c_api = ["type(c_ptr), value, intent(in)"]
+    return a
+
+
 def ivectorint(name, value=None, python_value=None, julia_value=None):
     if julia_value == "[]":
         julia_value = "Cint[]"

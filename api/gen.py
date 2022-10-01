@@ -1178,6 +1178,12 @@ onelab.add('run', doc, None, istring('name', '""'), istring('command', '""'))
 
 logger = gmsh.add_module('logger', 'information logging functions')
 
+doc = '''Get the message callback.'''
+logger.add('getCallback', doc, ovoidstar('callback'))
+
+doc = '''Set the message callback.'''
+logger.add('setCallback', doc, None, ivoidstarnonconst('callback'))
+
 doc = '''Write a `message'. `level' can be "info", "warning" or "error".'''
 logger.add('write', doc, None, istring('message'), istring('level', '"info"'))
 

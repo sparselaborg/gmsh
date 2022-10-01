@@ -4914,6 +4914,30 @@ GMSH_API void gmshOnelabRun(const char * name, const char * command, int * ierr)
   }
 }
 
+GMSH_API void* gmshLoggerGetCallback(int * ierr)
+{
+  void* result_api_ = 0;
+  if(ierr) *ierr = 0;
+  try {
+    result_api_ = gmsh::logger::getCallback();
+  }
+  catch(...){
+    if(ierr) *ierr = 1;
+  }
+  return result_api_;
+}
+
+GMSH_API void gmshLoggerSetCallback(void * callback, int * ierr)
+{
+  if(ierr) *ierr = 0;
+  try {
+    gmsh::logger::setCallback(callback);
+  }
+  catch(...){
+    if(ierr) *ierr = 1;
+  }
+}
+
 GMSH_API void gmshLoggerWrite(const char * message, const char * level, int * ierr)
 {
   if(ierr) *ierr = 0;
