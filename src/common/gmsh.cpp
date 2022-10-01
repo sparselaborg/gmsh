@@ -8611,14 +8611,14 @@ GMSH_API void gmsh::onelab::run(const std::string &name,
 
 GMSH_API void* gmsh::logger::getCallback()
 {
-  if(!_checkInit()) return;
+  if(!_checkInit()) return nullptr;
   return Msg::GetCallback();
 }
 
 GMSH_API void gmsh::logger::setCallback(void* callback)
 {
-  if(!_checkInit()) return;
-  Msg::SetCallback(callback);
+  if(!_checkInit()) return
+  Msg::SetCallback(static_cast<GmshMessage*>(callback));
 }
 
 GMSH_API void gmsh::logger::write(const std::string &message,
